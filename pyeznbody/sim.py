@@ -1,6 +1,5 @@
-import window
-import logic
-
+import pyeznbody.window
+import pyeznbody.logic
 
 bodies = []
 m_resolution = [0, 0]
@@ -23,12 +22,12 @@ def init(resolution=[640, 480]):
     global m_resolution
     m_resolution = resolution
     global graphics_thread
-    graphics_thread = window._GraphicsThread(
+    graphics_thread = pyeznbody.window._GraphicsThread(
         resolution, _yield_screen_body_pos, should_close)
     graphics_thread.setDaemon(True)
     graphics_thread.start()
     global logic_thread
-    logic_thread = logic._LogicThread(should_close)
+    logic_thread = pyeznbody.logic._LogicThread(should_close)
     logic_thread.setDaemon(True)
     logic_thread.start()
 

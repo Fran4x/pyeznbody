@@ -2,7 +2,6 @@ import threading
 import pygame
 import pygame.locals
 import pygame.draw
-from sim import _ShouldCloseWrapper
 
 
 class _GraphicsThread(threading.Thread):

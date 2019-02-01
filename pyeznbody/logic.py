@@ -1,8 +1,6 @@
 import threading
 import math
-from sim import _ShouldCloseWrapper
-from sim import _get_bodies
-from sim import _Body
+import time
 
 
 class _LogicThread(threading.Thread):
@@ -11,5 +9,6 @@ class _LogicThread(threading.Thread):
         self.m_should_close = should_close
 
     def run(self):
+        self.last_time = time.time()
         while not self.m_should_close.m_should_close:
-            pass
+            self.delta, self.last_time = time.time() - self.last_time, time.time()
