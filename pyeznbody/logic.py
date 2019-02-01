@@ -27,9 +27,9 @@ class _LogicThread(threading.Thread):
                             (b.m_pos[0] - ob.m_pos[0]) / (r2**2+E)
                         a_y += (-1) * G * \
                             (b.m_pos[1] - ob.m_pos[1]) / (r2**2+E)
-                b.m_vel = (b.m_vel[0] + self.delta * a_x,
-                           b.m_vel[1] + self.delta * a_y)
+                b.m_vel[0] = b.m_vel[0] + self.delta * a_x
+                b.m_vel[1] = b.m_vel[1] + self.delta * a_y
 
             for b in self.m_get_bodies():
-                b.m_pos = (b.m_pos[0] + b.m_vel[0] * self.delta,
-                           b.m_pos[1] + b.m_vel[1] * self.delta)
+                b.m_pos[0], b.m_pos[1] = b.m_pos[0] + b.m_vel[0] * \
+                    self.delta, b.m_pos[1] + b.m_vel[1] * self.delta

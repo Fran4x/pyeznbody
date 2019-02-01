@@ -1,3 +1,4 @@
+import array
 import pyeznbody.window
 import pyeznbody.logic
 
@@ -6,7 +7,7 @@ m_resolution = [0, 0]
 
 
 class _Body:
-    def __init__(self, pos, vel=(0, 0)):
+    def __init__(self, pos, vel):
         self.m_pos = pos
         self.m_vel = vel
 
@@ -40,8 +41,9 @@ def init(resolution=[640, 480]):
     bodies = []
 
 
-def add_body(pos, vel=(0, 0)):
-    bodies.append(_Body(pos, vel))
+def add_body(p_x, p_y, v_x=0.0, v_y=0.0):
+    bodies.append(
+        _Body(array.array('d', [p_x, p_y]), array.array('d', [v_x, v_y])))
 
 
 def _yield_screen_body_pos():
