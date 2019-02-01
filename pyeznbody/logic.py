@@ -33,3 +33,7 @@ class _LogicThread(threading.Thread):
             for b in self.m_get_bodies():
                 b.m_pos[0], b.m_pos[1] = b.m_pos[0] + b.m_vel[0] * \
                     self.delta, b.m_pos[1] + b.m_vel[1] * self.delta
+                if b.m_pos[0] < -1 or b.m_pos[0] > 1:
+                    b.m_vel[0] *= -1
+                if b.m_pos[1] < -1 or b.m_pos[1] > 1:
+                    b.m_vel[1] *= -1
