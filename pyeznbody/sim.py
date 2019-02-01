@@ -10,11 +10,19 @@ class _Body:
         self.m_vel = (0, 0)
 
 
+class _ShouldCloseWrapper:
+
+    def __init__(self):
+        self.m_should_close = False
+
+
 def init(resolution=[640, 480]):
+    should_close = _ShouldCloseWrapper()
     global m_resolution
     m_resolution = resolution
     global graphicsThread
-    graphicsThread = window._GraphicsThread(resolution, _yield_screen_body_pos)
+    graphicsThread = window._GraphicsThread(
+        resolution, _yield_screen_body_pos, should_close)
     graphicsThread.start()
     global bodies
     bodies = []
