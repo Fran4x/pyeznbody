@@ -1,4 +1,5 @@
 import array
+import random
 import pyeznbody.window
 import pyeznbody.logic
 
@@ -44,6 +45,15 @@ def init(resolution=[640, 480]):
 def add_body(p_x, p_y, v_x=0.0, v_y=0.0):
     bodies.append(
         _Body(array.array('d', [p_x, p_y]), array.array('d', [v_x, v_y])))
+
+
+def add_random_bodies(amount):
+    for i in range(amount):
+        p_x = random.random() * 2 - 1
+        p_y = random.random() * 2 - 1
+        v_x = random.random() * 0.4 - 0.2
+        v_y = random.random() * 0.4 - 0.2
+        add_body(p_x, p_y, v_x, v_y)
 
 
 def _yield_screen_body_pos():
