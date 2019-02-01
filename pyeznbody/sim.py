@@ -47,12 +47,12 @@ def add_body(p_x, p_y, v_x=0.0, v_y=0.0):
         _Body(array.array('d', [p_x, p_y]), array.array('d', [v_x, v_y])))
 
 
-def add_random_bodies(amount):
+def add_random_bodies(amount, vel_range=0.2):
     for i in range(amount):
         p_x = random.random() * 2 - 1
         p_y = random.random() * 2 - 1
-        v_x = random.random() * 0.4 - 0.2
-        v_y = random.random() * 0.4 - 0.2
+        v_x = random.random() * vel_range*2 - vel_range
+        v_y = random.random() * vel_range*2 - vel_range
         add_body(p_x, p_y, v_x, v_y)
 
 
