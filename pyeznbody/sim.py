@@ -6,9 +6,9 @@ m_resolution = [0, 0]
 
 
 class _Body:
-    def __init__(self, pos):
+    def __init__(self, pos, vel=(0, 0)):
         self.m_pos = pos
-        self.m_vel = (0, 0)
+        self.m_vel = vel
 
 
 class _ShouldCloseWrapper:
@@ -19,6 +19,11 @@ class _ShouldCloseWrapper:
 
 def init(resolution=[640, 480]):
     should_close = _ShouldCloseWrapper()
+    global close
+
+    def close():
+        should_close.m_should_close = True
+
     global m_resolution
     m_resolution = resolution
     global graphics_thread
@@ -27,7 +32,7 @@ def init(resolution=[640, 480]):
     graphics_thread.setDaemon(True)
     graphics_thread.start()
     global logic_thread
-    logic_thread = pyeznbody.logic._LogicThread(should_close)
+    logic_thread = pyeznbody.logic._LogicThread(should_close, _get_bodies)
     logic_thread.setDaemon(True)
     logic_thread.start()
 
@@ -35,8 +40,8 @@ def init(resolution=[640, 480]):
     bodies = []
 
 
-def add_body(pos):
-    bodies.append(_Body(pos))
+def add_body(pos, vel=(0, 0)):
+    bodies.append(_Body(pos, vel))
 
 
 def _yield_screen_body_pos():
